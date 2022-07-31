@@ -30,11 +30,27 @@ class User_Financial_data(generics.ListCreateAPIView):
 
     def list(self, request):
         user_id = request.data['user_id']
-        queryset = UserFinancialdata.objects.filter(user_id=user_id)
-        serializer = self.serializer_class(queryset, many=True)
-        context = {"data": serializer.data}
-        return Response(context, status=status.HTTP_200_OK)
-
+        if queryset := UserFinancialdata.objects.filter(user_id=user_id):
+            # print("::::::::::::::",queryset)
+            serializer = self.serializer_class(queryset, many=True)
+            context = {"data": serializer.data}
+            return Response(context, status=status.HTTP_200_OK)
+        else:
+            not_found = {"message": "success",
+                        "data": [
+        {
+            "user_id": None,
+            "clerk_file": {
+                "planId": None,
+                "endDate": None,
+                "planName": None,
+                "startDate": None
+            }
+        }]
+        }
+            
+            return Response(not_found, status=status.HTTP_200_OK)
+            
 
 
 
