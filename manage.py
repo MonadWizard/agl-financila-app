@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'agl_financial_backend.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'agl_financial_backend.settings.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
@@ -20,3 +20,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
+# run by typing: python manage.py runserver --settings=agl_financial_backend.settings.development
